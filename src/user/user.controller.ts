@@ -6,6 +6,8 @@ import { ForgetEmail } from './dto/forget-email.dto';
 import { LocalAuthGuard } from 'src/auth/guard/local-auth.guard';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { User } from '@prisma/client';
 
 @Controller('user')
 export class UserController {
@@ -21,6 +23,11 @@ export class UserController {
   @Get('home')
   home(){
     return 'hello world'
+  }
+
+  @Get('me')
+  getMe(@CurrentUser() user:User){
+    return user
   }
 
   // @Post('forget')

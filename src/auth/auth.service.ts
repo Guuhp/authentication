@@ -11,7 +11,6 @@ import { UserToken } from './models/userToken';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly prisma: PrismaService,
     private readonly userService: UserService,
     private readonly jwtService: JwtService
   ) { }

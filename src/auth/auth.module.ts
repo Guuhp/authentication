@@ -7,18 +7,18 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 import { LocalAuthGuard } from './guard/local-auth.guard';
 import { LocalStrategy } from './strategies/local.strategy';
 import { UserModule } from 'src/user/user.module';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports:[
-    PrismaModule,
     PassportModule,
     UserModule,
     JwtModule.register({
-      secret:process.env.JWT_SECRET,
-      signOptions:{expiresIn:'30days'}
+      secret: process.env.JWT_SECRET,
+      signOptions:{expiresIn:'30d'}
     })
   ],
-  providers: [AuthService,LocalStrategy],
+  providers: [AuthService,LocalStrategy,JwtStrategy],
   controllers: [AuthController]
 })
 export class AuthModule {}

@@ -14,18 +14,22 @@ export class UserService {
 
   async create(data: CreateUserDto) {
     const salt = await bcrypt.genSalt()
-
     data.password = await bcrypt.hash(data.password, salt)
-
-    return this.prisma.user.create({ data });
+    const user = await this.prisma.user.create({ data });
+    return{...user,password:undefined}
   }
 
-  async findByEmail({email}: ForgetEmail) {
-    const emailUser = await this.prisma.user.findUnique({where:{email}})
-    
-    if(!emailUser){
+  async findOne(id: string) {
+  }
+
+  async findByEmail(email: string) {
+    const emailUser = await this.prisma.user.findUnique({ where: { email } })
+
+    if (!emailUser) {
       throw new BadRequestException("email não encontrado")
     }
+
+    return emailUser;
   }
 
 }

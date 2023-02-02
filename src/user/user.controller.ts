@@ -13,12 +13,12 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Post('forget')
-  async findEmail(@Body() email:ForgetEmail) {
-    console.log(email);
+  // @Post('forget')
+  // async findEmail(@Body() email:ForgetEmail) {
+  //   console.log(email);
     
-    return this.userService.findByEmail(email)
-  }
+  //   return this.userService.findByEmail(email)
+  // }
 
 
 }
